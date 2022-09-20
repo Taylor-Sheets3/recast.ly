@@ -1,29 +1,46 @@
-// import exampleVideoData from '../data/exampleVideoData.js';
-
+// import exampleVideoData
+import exampleVideoData from "../data/exampleVideoData.js";
+// reference child to parent (only way to do this is via import/export feature of es6)
+import VideoList from "./VideoList.js";
+import Search from "./Search.js";
+import VideoPlayer from "./VideoPlayer.js";
 
 const { useState } = React;
 
 const App = () => {
 
-  // exampleVideoData variable name
+  // const [listItems, setListItems] = useState(exampleVideoData);
+  const [currentVideo, setCurrentVideo] = useState(0);
 
-  // how to pass props (assign it to a variable name, key value pair, pass in a prop its an obj, we get to decide the key,)
+
+  // // all videos in the video list
+  // function videoList() {
+  //   // all videos in video list minus main player video
+  //   // spread operator, previous values of list items, include the current video state
+  //   // splice
+  // }
+
+  // keeps track of current video at main player
+  const handleClick = function(index) {
+    setCurrentVideo(index);
+  };
 
   return (
-    // exampleVideoData = {Window.exampleVideoData};
     <div>
       <nav className="navbar">
         <div className="col-md-6 offset-md-3">
-          <div><h5><em>search</em> {Window.exampleVideoData} </h5></div>
           {/* <div><h5><em>search</em> view goes here</h5></div> */}
+          <Search videos={exampleVideoData}/>
         </div>
       </nav>
       <div className="row">
         <div className="col-md-7">
-          <div><h5><em>videoPlayer</em> view goes here</h5></div>
+          <VideoPlayer video={exampleVideoData[currentVideo]}/>
+          {/* <div><h5><em>videoPlayer</em> view goes here</h5></div> */}
         </div>
         <div className="col-md-5">
-          <div><h5><em>videoList</em> view goes here</h5></div>
+          <VideoList videos={exampleVideoData} handleClick = {handleClick}/>
+          {/* <div><h5><em>videoList</em> view goes here</h5></div> */}
         </div>
       </div>
     </div>
