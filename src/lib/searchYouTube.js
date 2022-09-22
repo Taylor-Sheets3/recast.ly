@@ -5,7 +5,16 @@ $.ajaxPrefilter(function (settings, _, jqXHR) {
 });
 
 var searchYouTube = (query, callback) => {
-  // TODO
+  $.ajax({
+    url: 'https://app-hrsei-api.herokuapp.com/api/recastly/videos',
+    type: 'GET',
+    data: { youtube_api_key: YOUTUBE_API_KEY, q: query },
+    contentType: 'application/json',
+    success: callback,
+    error: null || function(error) {
+      console.error('recast.ly: failed to fetch videos', error);
+    }
+  });
 };
 
 export default searchYouTube;
